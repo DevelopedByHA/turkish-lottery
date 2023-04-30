@@ -1,4 +1,5 @@
 import RaffleCard from '../raffle-card';
+import Placeholder from '../../../public/nft-placeholder.png';
 
 const RaffleList = () => {
   return (
@@ -10,7 +11,19 @@ const RaffleList = () => {
       {Array(10)
         .fill(0)
         .map((_, i) => (
-          <RaffleCard key={i} countdown={Date.now() + i * 5000} />
+          <RaffleCard
+            description=""
+            price={Math.random() * 2}
+            totalTickets={Math.ceil(Math.random() * 100)}
+            ticketsAvailable={Math.floor(Math.random() * 100)}
+            familyName="Theheist"
+            nftName="The Heist #7608"
+            creator="Dr_Psycho"
+            image={Placeholder.src}
+            id={i + ''}
+            key={i}
+            deadline={Date.now() + i * 5000}
+          />
         ))}
     </div>
   );

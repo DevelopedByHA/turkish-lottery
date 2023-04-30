@@ -2,30 +2,52 @@ import Link from 'next/link';
 import { FC } from 'react';
 import RaffleButton from '../raffle-button';
 import Image from 'next/image';
-import Placeholder from '../../../public/nft-placeholder.png';
 import { useSliderContext } from '@/context/slider-context';
-type RaffleCardProps = {
-  countdown: number;
-};
-const RaffleCard: FC<RaffleCardProps> = ({ countdown }) => {
-  const { setSliderIsOpen, openSlider } = useSliderContext();
+import { RaffleType } from '@/types/raffle';
 
+const RaffleCard: FC<RaffleType> = ({
+  deadline,
+  description,
+  id,
+  image,
+  price,
+  ticketsAvailable,
+  totalTickets,
+  winner,
+  familyName,
+  nftName,
+  creator,
+}) => {
+  const { openSlider } = useSliderContext();
+  const handleClick = () => {
+    openSlider({
+      deadline,
+      description,
+      id,
+      image,
+      price,
+      ticketsAvailable,
+      totalTickets,
+      winner,
+      familyName,
+      nftName,
+      creator,
+    });
+  };
   return (
     <div className="flex flex-col overflow-hidden rounded-lg ">
       <div className="relative">
-        <div className="aspect-w-1 aspect-h-1 cursor-pointer">
-          <Image src={Placeholder} alt="Placeholder" />
+        <div className="aspect-w-1  h-[320px] cursor-pointer">
+          <Image src={image} fill alt="Placeholder" />
         </div>
       </div>
       <div className="overflow-hidden rounded-b-2xl bg-white p-4 transition-all">
         <div className="flex items-center">
-          <Link href={'/'}>Oggy Pods</Link>
+          <Link href={'/'}>{familyName}</Link>
         </div>
-        <h2 className="line-clamp-1 text-left text-xl font-bold ">
-          oogy pod #838
-        </h2>
+        <h2 className="line-clamp-1 text-left text-xl font-bold ">{nftName}</h2>
         <div className="flex items-center gap-x-2 pb-1">
-          <Link href={'/'}>@mjbreese613</Link>
+          <Link href={'/'}>@{creator}</Link>
         </div>
         <div className="mb-3 flex justify-between">
           <div>
@@ -33,7 +55,7 @@ const RaffleCard: FC<RaffleCardProps> = ({ countdown }) => {
               Tickets Remaining
             </strong>
             <p className="text-left text-xl font-bold leading-none text-purple-500 ">
-              10 / 50
+              {ticketsAvailable} / {totalTickets}
             </p>
           </div>
           <div>
@@ -41,11 +63,11 @@ const RaffleCard: FC<RaffleCardProps> = ({ countdown }) => {
               Price/Ticket
             </strong>
             <p className="text-left text-xl font-bold leading-none text-purple-500 ">
-              0.699 SOL
+              {price.toFixed(4)} SOL
             </p>
           </div>
         </div>
-        <RaffleButton onClick={openSlider} countdown={new Date(countdown)} />
+        <RaffleButton onClick={handleClick} countdown={new Date(deadline)} />
       </div>
     </div>
   );

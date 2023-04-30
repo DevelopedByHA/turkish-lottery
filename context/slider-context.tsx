@@ -1,10 +1,13 @@
+import { RaffleType } from '@/types/raffle';
 import { addLock, removeLock } from '@/utils/body';
 import { createContext, useContext, useState } from 'react';
 
 type SliderContextValue = {
   sliderIsOpen: boolean;
   setSliderIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  openSlider: () => void;
+  slideData: RaffleType | null;
+  setSlideData: React.Dispatch<React.SetStateAction<RaffleType | null>>;
+  openSlider: (slideData: RaffleType) => void;
   closeSlider: () => void;
 };
 const SliderContext = createContext<SliderContextValue>({
@@ -12,21 +15,34 @@ const SliderContext = createContext<SliderContextValue>({
   setSliderIsOpen: () => {},
   openSlider: () => {},
   closeSlider: () => {},
+  slideData: null,
+  setSlideData: () => {},
 });
 export default SliderContext;
 
 const SliderContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [sliderIsOpen, setSliderIsOpen] = useState(false);
-
-  const openSlider = () => {
+  const [slideData, setSlideData] = useState<RaffleType | null>(null); // [raffleId, raffleData
+  const openSlider = (slideData: RaffleType) => {
+    setSlideData(slideData);
     setSliderIsOpen(true);
     addLock();
   };
   const closeSlider = () => {
     setSliderIsOpen(false);
+    setTimeout(() => {
+      setSlideData(null);
+    }, 1000);
     removeLock();
   };
-  const value = { sliderIsOpen, setSliderIsOpen, openSlider, closeSlider };
+  const value = {
+    sliderIsOpen,
+    setSliderIsOpen,
+    openSlider,
+    closeSlider,
+    slideData,
+    setSlideData,
+  };
 
   return (
     <SliderContext.Provider value={value}>{children}</SliderContext.Provider>
