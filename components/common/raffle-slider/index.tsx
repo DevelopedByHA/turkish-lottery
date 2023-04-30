@@ -23,7 +23,7 @@ const RaffleSlider: FC = ({}) => {
       />
 
       {slideData && (
-        <div className="relative z-10 flex h-max min-h-screen w-full  flex-col  bg-primary  px-10  pt-20  md:max-w-screen-sm">
+        <div className="relative z-10 flex h-max min-h-screen w-full  flex-col  bg-primary  px-10  pt-20  md:max-w-[500px]">
           <div className="flex flex-col overflow-hidden rounded-lg ">
             <div className="relative">
               <div className="aspect-w-1  h-[320px] cursor-pointer">
