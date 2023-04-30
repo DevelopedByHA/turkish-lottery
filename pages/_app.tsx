@@ -29,8 +29,12 @@ import '@solana/wallet-adapter-react-ui/styles.css';
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
+import { Metaplex } from '@metaplex-foundation/js';
+import { Connection } from '@solana/web3.js';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MetaplexProvider } from '@/context/metaplex';
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
@@ -61,9 +65,13 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets}>
           <WalletModalProvider>
-            <AuthProvider>
-              <BaseLayout>{getLayout(<Component {...pageProps} />)}</BaseLayout>
-            </AuthProvider>
+            <MetaplexProvider>
+              <AuthProvider>
+                <BaseLayout>
+                  {getLayout(<Component {...pageProps} />)}
+                </BaseLayout>
+              </AuthProvider>
+            </MetaplexProvider>
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>
