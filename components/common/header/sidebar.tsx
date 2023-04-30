@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 import NavItem from './nav-item';
 import SolanaConnectButton from '../solana/connect-button';
+import { PATHS } from '@/routes/routes';
 
 type Props = {
   menuOpen: boolean;
@@ -21,13 +22,25 @@ const Sidebar: FC<Props> = ({ menuOpen, closeMenu }) => {
         }`}
       />
 
-      <div className="bg-primary relative z-10 flex h-full w-full  flex-col  px-10  pt-20  sm:w-3/4">
+      <div className="relative z-10 flex h-full w-full flex-col  bg-primary  px-10  pt-20  sm:w-3/4">
         <div>
           <ul className={'flex flex-col gap-y-4 text-2xl font-semibold'}>
-            <NavItem title="Feed" path="/" />
-            <NavItem title="Create" path="/create" />
-            <NavItem title="Tags" path="/tags" />
-            <NavItem title="About" path="/about" />
+            <NavItem
+              onClick={closeMenu}
+              title="Featured"
+              path={PATHS.app.featured}
+            />
+            <NavItem
+              onClick={closeMenu}
+              title="All Raffles"
+              path={PATHS.app.all}
+            />
+            <NavItem
+              onClick={closeMenu}
+              title="Past Raffles"
+              path={PATHS.app.past}
+            />
+            <NavItem onClick={closeMenu} title="About" path="/about" />
             <SolanaConnectButton />
           </ul>
         </div>

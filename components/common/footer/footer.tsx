@@ -32,16 +32,16 @@ const Footer = () => {
           title="Navigation"
           items={[
             {
-              title: 'Home',
-              path: PATHS.app.home,
+              title: 'Featured',
+              path: PATHS.app.featured,
             },
             {
-              title: 'Services',
-              path: PATHS.app.services,
+              title: 'All Raffles',
+              path: PATHS.app.all,
             },
             {
-              title: 'solutions',
-              path: PATHS.app.solutions,
+              title: 'Past Raffles',
+              path: PATHS.app.past,
             },
           ]}
         />
@@ -129,7 +129,12 @@ const ListItems = ({
       <ul className="flex flex-col gap-2">
         {items.map((item, index) => (
           <li key={index}>
-            <Link className="text-secondary-text text-sm" href={item.path}>
+            <Link
+              className="text-secondary-text text-sm"
+              href={item.path}
+              scroll
+              shallow
+            >
               <span className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-black after:transition-[width] after:content-[''] hover:after:ml-auto hover:after:w-full ">
                 {item.title}
               </span>
