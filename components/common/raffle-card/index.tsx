@@ -43,11 +43,11 @@ const RaffleCard: FC<RaffleType> = ({
       </div>
       <div className="overflow-hidden rounded-b-2xl bg-white p-4 transition-all">
         <div className="flex items-center">
-          <Link href={'/home'}>{familyName}</Link>
+          <Link href={'/'}>{familyName}</Link>
         </div>
         <h2 className="line-clamp-1 text-left text-xl font-bold ">{nftName}</h2>
         <div className="flex items-center gap-x-2 pb-1">
-          <Link href={'/home'}>@{creator}</Link>
+          <Link href={'/'}>@{creator}</Link>
         </div>
         <div className="mb-3 flex justify-between">
           <div>

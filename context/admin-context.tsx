@@ -38,7 +38,7 @@ const AuthProvider: FC<AuthProviderProps> = (props) => {
   const signOut = async () => {
     sessionStorage.clear();
     setIsAuthorized(false);
-    router.replace('/home');
+    router.replace('/');
   };
 
   const value = {
@@ -61,7 +61,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   if (typeof window !== 'undefined' && !auth.isAuthorized) {
     toast.error('You are not authorized to view this page');
 
-    router.push('/home');
+    router.push('/');
   }
 
   return <>{children}</>;

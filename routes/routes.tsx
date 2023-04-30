@@ -1,6 +1,6 @@
 export const PATHS = {
   app: {
-    home: '/home',
+    home: '/',
     services: '/services',
     indestries: '/indestries',
     partners: '/partners',

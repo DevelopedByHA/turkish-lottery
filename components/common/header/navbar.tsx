@@ -12,7 +12,7 @@ const Navbar: FC<Props> = ({ menuOpen, setMenuOpen }) => {
   const { isAuthorized } = useAuth();
   return (
     <div className="fixed left-0 top-0 z-[65] flex  h-[72px] w-full flex-row items-center justify-between bg-primary px-4 md:px-8">
-      <Link href={'/home'}>logo here</Link>
+      <Link href={'/'}>logo here</Link>
       <div className="hidden md:block">
         <nav className="flex flex-row items-center gap-2">
           {isAuthorized && <NavItem title={'admin'} path="/admin" />}

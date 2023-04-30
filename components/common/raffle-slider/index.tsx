@@ -32,7 +32,7 @@ const RaffleSlider: FC = ({}) => {
             </div>
             <div className="overflow-hidden rounded-b-2xl bg-white p-4 transition-all">
               <div className="flex items-center">
-                <Link href={'/home'}>{slideData.familyName}</Link>
+                <Link href={'/'}>{slideData.familyName}</Link>
               </div>
               <h2 className="line-clamp-1 text-left text-xl font-bold ">
                 {slideData.nftName}
