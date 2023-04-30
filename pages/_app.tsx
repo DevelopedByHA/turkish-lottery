@@ -19,10 +19,7 @@ import {
   SolletWalletAdapter,
   TorusWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
-import {
-  ConnectionProvider,
-  WalletProvider,
-} from '@solana/wallet-adapter-react';
+import { WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { AuthProvider } from '@/context/admin-context';
 import '@solana/wallet-adapter-react-ui/styles.css';
@@ -35,6 +32,7 @@ import { Connection } from '@solana/web3.js';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MetaplexProvider } from '@/context/metaplex';
+import { ConnectionProvider } from '@/context/connection';
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 

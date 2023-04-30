@@ -14,7 +14,11 @@ const DEFAULT_CONTEXT = {
 export const MetaplexContext = createContext(DEFAULT_CONTEXT);
 
 export function useMetaplex() {
-  return useContext(MetaplexContext);
+  const context = useContext(MetaplexContext);
+  if (!context) {
+    throw new Error('Missing Metaplex context');
+  }
+  return context;
 }
 export const MetaplexProvider = ({ children }: { children: any }) => {
   const { connection } = useConnection();
