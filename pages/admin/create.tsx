@@ -1,12 +1,9 @@
 import AdminLayout from '@/components/layout/admin-layout';
+import CreateRaffle from '@/components/sections/admin/create';
 import { ReactElement } from 'react';
 
 const Create = () => {
-  return (
-    <div>
-      <h1>Create</h1>
-    </div>
-  );
+  return <CreateRaffle />;
 };
 
 Create.getLayout = function getLayout(page: ReactElement) {

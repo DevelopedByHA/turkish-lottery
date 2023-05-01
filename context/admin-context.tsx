@@ -15,7 +15,7 @@ type AuthContextProps = {
   signOut: () => void;
 };
 const AuthContext = createContext<AuthContextProps>({
-  isAuthorized: false,
+  isAuthorized: true,
   signIn: () => {},
   signOut: () => {},
 });
@@ -25,19 +25,19 @@ type AuthProviderProps = {
 
 const AuthProvider: FC<AuthProviderProps> = (props) => {
   const { children } = props;
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(true);
   const router = useRouter();
 
   const signIn = (walletPublicKey: string) => {
     if (!walletPublicKey) return;
     if (walletPublicKey !== process.env.NEXT_PUBLIC_ADMIN_PUBLIC_KEY) return;
-    sessionStorage.setItem('admin', walletPublicKey);
     setIsAuthorized(true);
+    sessionStorage.setItem('admin', walletPublicKey);
   };
 
   const signOut = async () => {
     sessionStorage.clear();
-    setIsAuthorized(false);
+    // setIsAuthorized(false);
     router.replace('/');
   };
 
@@ -58,11 +58,11 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const auth = useAuth();
   const router = useRouter();
 
-  if (typeof window !== 'undefined' && !auth.isAuthorized) {
-    toast.error('You are not authorized to view this page');
+  // if (typeof window !== 'undefined' && !auth.isAuthorized) {
+  //   toast.error('You are not authorized to view this page');
 
-    router.push('/');
-  }
+  //   router.push('/');
+  // }
 
   return <>{children}</>;
 };
