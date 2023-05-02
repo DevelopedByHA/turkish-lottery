@@ -16,6 +16,7 @@ const CreateRaffle = () => {
     description: string;
     supply: number;
     ticketPrice: number;
+    winner: string;
   }>({
     startDate: null,
     endDate: null,
@@ -23,6 +24,7 @@ const CreateRaffle = () => {
     description: '',
     supply: 0,
     ticketPrice: 0,
+    winner: '',
   });
 
   // validation
@@ -33,6 +35,7 @@ const CreateRaffle = () => {
     description: string;
     supply: string;
     ticketPrice: string;
+    winner: string;
   }>({
     startDate: '',
     endDate: '',
@@ -40,6 +43,7 @@ const CreateRaffle = () => {
     description: '',
     supply: '',
     ticketPrice: '',
+    winner: '',
   });
 
   const validate = () => {
@@ -50,6 +54,7 @@ const CreateRaffle = () => {
       description: '',
       supply: '',
       ticketPrice: '',
+      winner: '',
     };
     console.log(createInfo);
     if (!createInfo.startDate) {
@@ -79,6 +84,10 @@ const CreateRaffle = () => {
     if (!createInfo.ticketPrice || createInfo.ticketPrice <= 0) {
       errors.ticketPrice = 'Ticket price is required';
     }
+    if (!createInfo.winner) {
+      errors.winner = 'Winner is required';
+    }
+
     setErrors(errors);
     console.log(errors);
 
@@ -107,8 +116,8 @@ const CreateRaffle = () => {
   return (
     <section>
       <form onSubmit={handleCreateRaffle} className="flex flex-col gap-4">
-        <div className="flex flex-col md:flex-row md:items-baseline gap-4">
-          <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-4 md:flex-row md:items-baseline">
+          <div className="flex w-full flex-col gap-2">
             <InputLabel label="Start Date" />
             <Input
               type="date"
@@ -121,7 +130,7 @@ const CreateRaffle = () => {
               error={errors.startDate}
             />
           </div>
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex w-full flex-col gap-2">
             <InputLabel label="End Date" />
             <Input
               type="date"
@@ -134,7 +143,7 @@ const CreateRaffle = () => {
               error={errors.endDate}
             />
           </div>
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex w-full flex-col gap-2">
             <InputLabel label="Supply" />
 
             <Input
@@ -147,7 +156,7 @@ const CreateRaffle = () => {
               min="0"
             />
           </div>
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex w-full flex-col gap-2">
             <InputLabel label="Ticket Price (SOL)" />
             <Input
               type="number"
@@ -160,7 +169,7 @@ const CreateRaffle = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex w-full flex-col gap-2">
           <InputLabel label="Collection Name" />
           <Input
             type="text"
@@ -170,7 +179,7 @@ const CreateRaffle = () => {
             error={errors.collectionName}
           />
         </div>
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex w-full flex-col gap-2">
           <InputLabel label="Description " />
           <Textarea
             type="text"
@@ -181,18 +190,28 @@ const CreateRaffle = () => {
             error={errors.description}
           />
         </div>
+        <div className="flex w-full flex-col gap-2">
+          <InputLabel label="Winner" />
+          <Input
+            type="text"
+            value={createInfo.winner}
+            onChange={handleChanges}
+            name="winner"
+            error={errors.winner}
+          />
+        </div>
 
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
-          <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center">
+          <div className="flex w-full flex-col gap-2">
             <InputLabel label="Prize" />
             <ImageInput setFile={setPrizeImage} file={prizeImage} />
           </div>
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex w-full flex-col gap-2">
             <InputLabel label="Ticket" />
             <ImageInput setFile={setTicketImage} file={ticketImage} />
           </div>
         </div>
-        <div className="w-fit self-end mt-8">
+        <div className="mt-8 w-fit self-end">
           <Button> Create Raffle</Button>
         </div>
       </form>
