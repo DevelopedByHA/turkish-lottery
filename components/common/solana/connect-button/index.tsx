@@ -5,11 +5,7 @@ const SolanaConnectButton = () => {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
 
-  return (
-    <div>
-      <WalletMultiButton />
-    </div>
-  );
+  return <WalletMultiButton />;
 };
 
 export default SolanaConnectButton;
